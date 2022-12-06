@@ -62,4 +62,25 @@ router.patch('/atualizar/:id', async (req, res) => {
     }
 })
 
+
+//DELETE CURSO
+router.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id
+
+    const courses = await Course.findOne({ _id: id })
+
+    if (!courses) {
+        res.status(422).json({ message: 'Usuário não encontrado!' })
+        return
+    }
+
+    try {
+        await Course.deleteOne({ _id: id })
+
+        res.status(200).json({ message: 'Usuário removido com sucesso!' })
+    } catch (error) {
+        res.status(500).json({ erro: error })
+    }
+})
+
 module.exports = router
