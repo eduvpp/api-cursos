@@ -6,7 +6,9 @@ const { get } = require('mongoose')
 const app = express()
 const Course = require('./models/Course')
 
+const cors = require('cors');
 
+app.use(cors({ origin: true }));
 
 app.use(
     express.urlencoded({
@@ -19,7 +21,7 @@ app.use(express.json())
 // ROTAS DA API 
 
 const userRoutes = require('./routes/userRoutes')
-app.use('/user/cadastro', userRoutes)
+app.use('/users', userRoutes)
 
 const courseRoutes = require('./routes/courseRoutes')
 app.use('/courses', courseRoutes)
